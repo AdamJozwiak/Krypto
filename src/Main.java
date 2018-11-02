@@ -48,14 +48,13 @@ public class Main extends Application {
         TextField tekstOdszyfr = new TextField();
         GridPane.setConstraints(tekstOdszyfr, 1, 3);
 
-        Szyfruj słowo= new Szyfruj(tekstJawny);
-
         //Przyciski
         Button szyfr = new Button("Szyfruj");
         GridPane.setConstraints(szyfr, 3, 0);
 
         szyfr.setOnAction(e -> {
-            tekstJawny = tekstSzyfr.getText();
+            String txt_from =tekstSzyfr.getText();
+            Szyfruj słowo= new Szyfruj(txt_from);
             tekstZaszyfr.setText(słowo.szyfr());
         });
 
