@@ -13,14 +13,14 @@ public class Main extends Application {
     public static void main(String[] args)
     {
         launch(args);
-        Szyfruj słowo= new Szyfruj("Haslo");
-
     }
 
     @Override
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("One Time Pad");
+
+        final String[] tekstJawny = {new String()};
 
         //Ustawianie parametrów Grid
         GridPane grid = new GridPane();
@@ -48,10 +48,16 @@ public class Main extends Application {
         TextField tekstOdszyfr = new TextField();
         GridPane.setConstraints(tekstOdszyfr, 1, 3);
 
+        Szyfruj słowo= new Szyfruj(tekstJawny);
+
         //Przyciski
         Button szyfr = new Button("Szyfruj");
         GridPane.setConstraints(szyfr, 3, 0);
-        //szyfr.setOnAction(e ->
+
+        szyfr.setOnAction(e -> {
+            tekstJawny = tekstSzyfr.getText();
+            tekstZaszyfr.setText(słowo.szyfr());
+        });
 
         Button deszyfr = new Button("Deszyfruj");
         GridPane.setConstraints(deszyfr, 3, 1);
@@ -60,32 +66,12 @@ public class Main extends Application {
         grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, szyfr, deszyfr);
 
 
-
         Scene scene = new Scene(grid, 400, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-/*    private String szyfruj(TextField input, String klucz) {
-
-        String tekstInput = input.getText();
-        String siema = "";
-
-        int ascii[] = new int[tekstInput.length()];
-        int kluczyk[] = new int[klucz.length()];
-        int ksor[] = new int[klucz.length()];
-
-        char c[] = new char[tekstInput.length()];
-
-        for (int i = 0; i < klucz.length(); i++) {
-            ascii[i] = tekstInput.charAt(i);
-            kluczyk[i] = klucz.charAt(i);
-            ksor[i] = ascii[i] ^ kluczyk[i];
-            siema = siema + ksor[i];
-        }
-        return siema;
-    }
-
+/*
     private void deszyfruj(String klucz){
 
         char c[] = new char[tekstInput.length()];
