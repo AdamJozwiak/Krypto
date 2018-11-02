@@ -20,7 +20,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("One Time Pad");
 
-        final String[] tekstJawny = {new String()};
+        Szyfruj słowo;
 
         //Ustawianie parametrów Grid
         GridPane grid = new GridPane();
@@ -54,12 +54,18 @@ public class Main extends Application {
 
         szyfr.setOnAction(e -> {
             String txt_from =tekstSzyfr.getText();
-            Szyfruj słowo= new Szyfruj(txt_from);
+            słowo=new Szyfruj(txt_from);
             tekstZaszyfr.setText(słowo.szyfr());
         });
 
         Button deszyfr = new Button("Deszyfruj");
-        GridPane.setConstraints(deszyfr, 3, 1);
+        GridPane.setConstraints(deszyfr, 3, 1);             //Pesko jest zjebany
+        deszyfr.setOnAction(e ->
+        {
+            String txt_to=tekstZaszyfr.getText();
+            //Szyfruj słowo=new Szyfruj(txt_to);
+            tekstOdszyfr.setText(słowo.deszyfruj());
+        });
 
         //Dodawanie do Grid
         grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, szyfr, deszyfr);
