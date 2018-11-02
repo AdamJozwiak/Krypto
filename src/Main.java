@@ -10,14 +10,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
+        Szyfruj słowo= new Szyfruj("Haslo");
+
     }
 
     @Override
     public void start(Stage primaryStage) {
-
-        String klucz = new String("kot");
 
         primaryStage.setTitle("One Time Pad");
 
@@ -50,7 +51,7 @@ public class Main extends Application {
         //Przyciski
         Button szyfr = new Button("Szyfruj");
         GridPane.setConstraints(szyfr, 3, 0);
-        szyfr.setOnAction(e -> szyfruj(tekstSzyfr, klucz));
+        //szyfr.setOnAction(e ->
 
         Button deszyfr = new Button("Deszyfruj");
         GridPane.setConstraints(deszyfr, 3, 1);
@@ -58,12 +59,14 @@ public class Main extends Application {
         //Dodawanie do Grid
         grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, szyfr, deszyfr);
 
+
+
         Scene scene = new Scene(grid, 400, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private String szyfruj(TextField input, String klucz) {
+/*    private String szyfruj(TextField input, String klucz) {
 
         String tekstInput = input.getText();
         String siema = "";
@@ -93,5 +96,5 @@ public class Main extends Application {
             c[i]=(char)ascii[i];
             System.out.print(c[i]);
         }
-    }
+    }*/
 }
