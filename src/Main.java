@@ -74,10 +74,7 @@ public class Main extends Application {
             String filePath = tekstPlik.getText();
             Pliki pliki=new Pliki();
             Szyfruj slowo = new Szyfruj(pliki.readFile(filePath));
-            String wysw = new String(slowo.szyfruj());
-            tekstZaszyfr.setText(wysw);
-            tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
-
+            tekstOdszyfr.setText(pliki.readFile(filePath));
         });
 
         //Dodawanie do Grid
