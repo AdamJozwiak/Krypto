@@ -12,8 +12,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -21,7 +20,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("One Time Pad");
-
 
         //Ustawianie parametrów Grid
         GridPane grid = new GridPane();
@@ -37,11 +35,18 @@ public class Main extends Application {
         tekstSzyfr.setPromptText("Twój szyfr");
         GridPane.setConstraints(tekstSzyfr, 1, 0);
 
+        Label nazwaPlik = new Label("Podaj ścieżkę do pliku:");
+        GridPane.setConstraints(nazwaPlik, 0, 1);
+
+        TextField tekstPlik = new TextField();
+        tekstSzyfr.setPromptText("Twój szyfr");
+        GridPane.setConstraints(tekstPlik, 1, 1);
+
         Label nazwaZaszyfr = new Label("Zaszyfrowany:");
-        GridPane.setConstraints(nazwaZaszyfr, 0, 1);
+        GridPane.setConstraints(nazwaZaszyfr, 0, 2);
 
         TextField tekstZaszyfr = new TextField();
-        GridPane.setConstraints(tekstZaszyfr, 1, 1);
+        GridPane.setConstraints(tekstZaszyfr, 1, 2);
 
         Label nazwaOdszyfr = new Label("Odszyfrowany:");
         GridPane.setConstraints(nazwaOdszyfr, 0, 3);
@@ -54,50 +59,23 @@ public class Main extends Application {
         GridPane.setConstraints(button_szyfr, 3, 0);
 
         button_szyfr.setOnAction(e -> {
-             String txt_from = tekstSzyfr.getText();
-             Szyfruj slowo=new Szyfruj(txt_from);
-             String wysw=new String(slowo.szyfruj());
-
-             tekstZaszyfr.setText(wysw);
-             String txt_to=tekstZaszyfr.getText();
-             tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
+            String txt_from = tekstSzyfr.getText();
+            Szyfruj slowo = new Szyfruj(txt_from);
+            String wysw = new String(slowo.szyfruj());
+            tekstZaszyfr.setText(wysw);
+            tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
 
         });
 
-
-        Button button_deszyfr = new Button("Deszyfruj");
-        GridPane.setConstraints(button_deszyfr, 3, 1);             //Pesko jest zjebany
-
-        /*button_deszyfr.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                x=12;
-                //System.out.pri+ntln(slowo.szyfruj());
-            String txt_to=tekstZaszyfr.getText();
-            slowo=new Szyfruj(txt_to);
-            tekstOdszyfr.setText(slowo.deszyfruj(txt_to));
-            }
-        });*/
+        Button button_szyfrplik = new Button("Szyfruj z pliku");
+        GridPane.setConstraints(button_szyfrplik, 3, 1);
 
         //Dodawanie do Grid
-        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_deszyfr);
+        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaPlik, tekstPlik, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_szyfrplik);
 
 
-        Scene scene = new Scene(grid, 400, 200);
+        Scene scene = new Scene(grid, 440, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-/*
-    private void deszyfruj(String klucz){
-
-        char c[] = new char[tekstInput.length()];
-
-        for(int i=0; i<klucz.length(); i++)
-        {
-            ascii[i]= ksor[i]^kluczyk[i];
-            c[i]=(char)ascii[i];
-            System.out.print(c[i]);
-        }
-    }*/
 }
