@@ -1,8 +1,9 @@
 import java.util.Random;
 
+
 public class Szyfruj {
 
-    public byte[] klucz;
+    private byte[] klucz;
     private byte[] tekstJawny;
 
     public Szyfruj(String tekstJawny)
@@ -38,4 +39,6 @@ public class Szyfruj {
 
         return txt_po;
     }
+
 }
+

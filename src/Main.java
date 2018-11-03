@@ -70,6 +70,16 @@ public class Main extends Application {
         Button button_szyfrplik = new Button("Szyfruj z pliku");
         GridPane.setConstraints(button_szyfrplik, 3, 1);
 
+        button_szyfrplik.setOnAction(e -> {
+            String filePath = tekstPlik.getText();
+            Pliki pliki=new Pliki();
+            Szyfruj slowo = new Szyfruj(pliki.readFile(filePath));
+            String wysw = new String(slowo.szyfruj());
+            tekstZaszyfr.setText(wysw);
+            tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
+
+        });
+
         //Dodawanie do Grid
         grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaPlik, tekstPlik, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_szyfrplik);
 
