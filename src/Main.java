@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +22,6 @@ public class Main extends Application {
 
         primaryStage.setTitle("One Time Pad");
 
-        Szyfruj słowo;
 
         //Ustawianie parametrów Grid
         GridPane grid = new GridPane();
@@ -49,26 +50,37 @@ public class Main extends Application {
         GridPane.setConstraints(tekstOdszyfr, 1, 3);
 
         //Przyciski
-        Button szyfr = new Button("Szyfruj");
-        GridPane.setConstraints(szyfr, 3, 0);
+        Button button_szyfr = new Button("Szyfruj");
+        GridPane.setConstraints(button_szyfr, 3, 0);
 
-        szyfr.setOnAction(e -> {
-            String txt_from =tekstSzyfr.getText();
-            słowo=new Szyfruj(txt_from);
-            tekstZaszyfr.setText(słowo.szyfr());
+        button_szyfr.setOnAction(e -> {
+             String txt_from = tekstSzyfr.getText();
+             Szyfruj slowo=new Szyfruj(txt_from);
+             String wysw=new String(slowo.szyfruj());
+
+             tekstZaszyfr.setText(wysw);
+             String txt_to=tekstZaszyfr.getText();
+             tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
+
         });
 
-        Button deszyfr = new Button("Deszyfruj");
-        GridPane.setConstraints(deszyfr, 3, 1);             //Pesko jest zjebany
-        deszyfr.setOnAction(e ->
-        {
+
+        Button button_deszyfr = new Button("Deszyfruj");
+        GridPane.setConstraints(button_deszyfr, 3, 1);             //Pesko jest zjebany
+
+        /*button_deszyfr.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                x=12;
+                //System.out.pri+ntln(slowo.szyfruj());
             String txt_to=tekstZaszyfr.getText();
-            //Szyfruj słowo=new Szyfruj(txt_to);
-            tekstOdszyfr.setText(słowo.deszyfruj());
-        });
+            slowo=new Szyfruj(txt_to);
+            tekstOdszyfr.setText(slowo.deszyfruj(txt_to));
+            }
+        });*/
 
         //Dodawanie do Grid
-        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, szyfr, deszyfr);
+        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_deszyfr);
 
 
         Scene scene = new Scene(grid, 400, 200);

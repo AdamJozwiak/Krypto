@@ -1,45 +1,40 @@
 import java.util.Random;
-import javafx.scene.control.TextField;
+
 public class Szyfruj {
 
-    private byte[] klucz;
-    private String tekstJawny;
+    public byte[] klucz;
+    private byte[] tekstJawny;
 
     public Szyfruj(String tekstJawny)
     {
-        this.tekstJawny=tekstJawny;
-        klucz=new byte[tekstJawny.length()];
+        this.tekstJawny=tekstJawny.getBytes();
+        klucz=new byte[this.tekstJawny.length];
         Random rnd = new Random();
         rnd.nextBytes(klucz);
     }
 
-    public String szyfr()
+    public byte[] szyfruj()
     {
-        String result;
-        byte[] bytes= new byte [tekstJawny.length()];
-        byte[] cipher= new byte [tekstJawny.length()];
+        byte[] cipher=new byte [tekstJawny.length];
 
-        for(int i=0; i<tekstJawny.length(); i++)
+        for(int i=0; i<tekstJawny.length; i++)
         {
-            bytes[i]=(byte) tekstJawny.charAt(i);
-            cipher[i]=(byte) (bytes[i]^klucz[i]);
+            cipher[i]=(byte) (tekstJawny[i]^klucz[i]);
         }
-        result = new String(cipher);
 
-        return result;
+        return cipher;
     }
 
-    public String deszyfruj(String result)
+    public String deszyfruj(byte[] bytes)
     {
         String txt_po;
-        byte[] bytes= new byte [result.length()];
-        byte[] cipher= new byte [result.length()];
-        for(int i=0; i<result.length(); i++)
+        byte[] nocipher=new byte [bytes.length];
+        for(int i=0; i<bytes.length; i++)
         {
-            bytes[i]=(byte) result.charAt(i);
-            cipher[i]=(byte) (klucz[i]^bytes[i]);
+            nocipher[i]=(byte) (bytes[i]^klucz[i]);
         }
-        txt_po = new String(cipher);
+        txt_po = new String(nocipher);
+
 
         return txt_po;
     }
