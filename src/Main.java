@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 
@@ -60,7 +59,8 @@ public class Main extends Application {
 
         button_szyfr.setOnAction(e -> {
             String txt_from = tekstSzyfr.getText();
-            Szyfruj slowo = new Szyfruj(txt_from);
+            byte [] byteArr = txt_from.getBytes();
+            Szyfruj slowo = new Szyfruj(byteArr);
             String wyswZaszyfr = new String(slowo.szyfruj());
             String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
             tekstZaszyfr.setText(wyswZaszyfr);
@@ -72,14 +72,14 @@ public class Main extends Application {
 
         button_szyfrplik.setOnAction(e -> {
             String filePath = tekstPlik.getText();
-            Pliki pliki=new Pliki();
+            Pliki pliki = new Pliki();
             Szyfruj slowo = new Szyfruj(pliki.readFile(filePath));
             String wyswZaszyfr = new String(slowo.szyfruj());
             String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
             tekstZaszyfr.setText(wyswZaszyfr);
             tekstOdszyfr.setText(wyswOdszyfr);
             try {
-                pliki.writeFile("C:\\Users\\Michał\\Desktop\\gowno2.jpeg", slowo.deszyfruj(slowo.szyfruj()));
+                pliki.writeFile("C:\\Users\\Adam\\Desktop\\1234.txt", slowo.deszyfruj(slowo.szyfruj()));
             }
             catch (IOException el) {
                 el.printStackTrace();
@@ -90,7 +90,7 @@ public class Main extends Application {
         grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaPlik, tekstPlik, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_szyfrplik);
 
 
-        Scene scene = new Scene(grid, 440, 200);
+        Scene scene = new Scene(grid, 440, 150);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
