@@ -62,14 +62,15 @@ public class Main extends Application {
         Button button_szyfr = new Button("Szyfruj");
         GridPane.setConstraints(button_szyfr, 3, 0);
 
-        /*button_szyfr.setOnAction(e -> {
+       button_szyfr.setOnAction(e -> {
             String txt_from = tekstSzyfr.getText();
-            Szyfruj slowo = new Szyfruj(txt_from);
+            byte [] byteArr = txt_from.getBytes();
+            Szyfruj slowo = new Szyfruj(byteArr);
             String wyswZaszyfr = new String(slowo.szyfruj());
             String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
             tekstZaszyfr.setText(wyswZaszyfr);
             tekstOdszyfr.setText(wyswOdszyfr);
-        });*/
+        });
 
         Button button_szyfrplik = new Button("Szyfruj z pliku");
         GridPane.setConstraints(button_szyfrplik, 3, 1);
@@ -83,7 +84,7 @@ public class Main extends Application {
             tekstZaszyfr.setText(wyswZaszyfr);
             tekstOdszyfr.setText(wyswOdszyfr);
             try {
-                pliki.writeFile("C:\\Users\\userbgpl.STUD\\Desktop\\1234.txt", slowo.deszyfruj(slowo.szyfruj()));
+                pliki.writeFile("C:\\Users\\Maciej Pracucik\\Desktop\\1234.jpg", slowo.deszyfruj(slowo.szyfruj()));
             }
             catch (IOException el) {
                 el.printStackTrace();
