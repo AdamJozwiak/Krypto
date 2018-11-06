@@ -1,4 +1,8 @@
+package com.company;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -6,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class Main extends Application {
@@ -56,14 +62,14 @@ public class Main extends Application {
         Button button_szyfr = new Button("Szyfruj");
         GridPane.setConstraints(button_szyfr, 3, 0);
 
-        button_szyfr.setOnAction(e -> {
+        /*button_szyfr.setOnAction(e -> {
             String txt_from = tekstSzyfr.getText();
             Szyfruj slowo = new Szyfruj(txt_from);
-            String wysw = new String(slowo.szyfruj());
-            tekstZaszyfr.setText(wysw);
-            tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
-
-        });
+            String wyswZaszyfr = new String(slowo.szyfruj());
+            String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
+            tekstZaszyfr.setText(wyswZaszyfr);
+            tekstOdszyfr.setText(wyswOdszyfr);
+        });*/
 
         Button button_szyfrplik = new Button("Szyfruj z pliku");
         GridPane.setConstraints(button_szyfrplik, 3, 1);
@@ -72,7 +78,16 @@ public class Main extends Application {
             String filePath = tekstPlik.getText();
             Pliki pliki=new Pliki();
             Szyfruj slowo = new Szyfruj(pliki.readFile(filePath));
-            tekstOdszyfr.setText(pliki.readFile(filePath));
+            String wyswZaszyfr = new String(slowo.szyfruj());
+            String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
+            tekstZaszyfr.setText(wyswZaszyfr);
+            tekstOdszyfr.setText(wyswOdszyfr);
+            try {
+                pliki.writeFile("C:\\Users\\userbgpl.STUD\\Desktop\\1234.txt", slowo.deszyfruj(slowo.szyfruj()));
+            }
+            catch (IOException el) {
+                el.printStackTrace();
+            }
         });
 
         //Dodawanie do Grid
