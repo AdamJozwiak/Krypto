@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class Main extends Application {
 
@@ -59,10 +61,10 @@ public class Main extends Application {
         button_szyfr.setOnAction(e -> {
             String txt_from = tekstSzyfr.getText();
             Szyfruj slowo = new Szyfruj(txt_from);
-            String wysw = new String(slowo.szyfruj());
-            tekstZaszyfr.setText(wysw);
-            tekstOdszyfr.setText(slowo.deszyfruj(slowo.szyfruj()));
-
+            String wyswZaszyfr = new String(slowo.szyfruj());
+            String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
+            tekstZaszyfr.setText(wyswZaszyfr);
+            tekstOdszyfr.setText(wyswOdszyfr);
         });
 
         Button button_szyfrplik = new Button("Szyfruj z pliku");
@@ -72,7 +74,16 @@ public class Main extends Application {
             String filePath = tekstPlik.getText();
             Pliki pliki=new Pliki();
             Szyfruj slowo = new Szyfruj(pliki.readFile(filePath));
-            tekstOdszyfr.setText(pliki.readFile(filePath));
+            String wyswZaszyfr = new String(slowo.szyfruj());
+            String wyswOdszyfr = new String (slowo.deszyfruj(slowo.szyfruj()));
+            tekstZaszyfr.setText(wyswZaszyfr);
+            tekstOdszyfr.setText(wyswOdszyfr);
+            try {
+                pliki.writeFile("C:\\Users\\Michał\\Desktop\\gowno2.jpeg", slowo.deszyfruj(slowo.szyfruj()));
+            }
+            catch (IOException el) {
+                el.printStackTrace();
+            }
         });
 
         //Dodawanie do Grid

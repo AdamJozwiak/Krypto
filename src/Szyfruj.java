@@ -26,18 +26,18 @@ public class Szyfruj {
         return cipher;
     }
 
-    public String deszyfruj(byte[] bytes)
+    public byte[] deszyfruj(byte[] bytes)
     {
-        String txt_po;
+        //String txt_po;
         byte[] nocipher=new byte [bytes.length];
         for(int i=0; i<bytes.length; i++)
         {
             nocipher[i]=(byte) (bytes[i]^klucz[i]);
         }
-        txt_po = new String(nocipher);
+        //txt_po = new String(nocipher);
 
 
-        return txt_po;
+        return nocipher;
     }
 
 }
