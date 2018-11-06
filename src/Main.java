@@ -79,7 +79,7 @@ public class Main extends Application {
             tekstZaszyfr.setText(wyswZaszyfr);
             tekstOdszyfr.setText(wyswOdszyfr);
             try {
-                pliki.writeFile("C:\\Users\\Adam\\Desktop\\1234.txt", slowo.deszyfruj(slowo.szyfruj()));
+                pliki.writeFile(pliki.pathBox(filePath), slowo.deszyfruj(slowo.szyfruj()));
             }
             catch (IOException el) {
                 el.printStackTrace();
