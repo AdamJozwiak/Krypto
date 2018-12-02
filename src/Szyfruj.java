@@ -13,6 +13,11 @@ public class Szyfruj {
         Random rnd = new Random();
         rnd.nextBytes(klucz);
     }
+    public Szyfruj (byte[] klucz, byte[] tekstJawny)
+    {
+        this.klucz=klucz;
+        this.tekstJawny=tekstJawny;
+    }
 
     public byte[] szyfruj()
     {
@@ -26,15 +31,24 @@ public class Szyfruj {
         return cipher;
     }
 
-    public byte[] deszyfruj(byte[] bytes)
+    public byte[] deszyfruj(byte[] cipher)
     {
-        byte[] nocipher = new byte [bytes.length];
-        for(int i=0; i<bytes.length; i++)
+        byte[] nocipher = new byte [cipher.length];
+        for(int i=0; i<cipher.length; i++)
         {
-            nocipher[i] = (byte) (bytes[i]^klucz[i]);
+            nocipher[i] = (byte) (cipher[i]^klucz[i]);
         }
 
         return nocipher;
     }
+    public byte[] getKlucz()
+    {
+        return klucz;
+    }
+    public byte[] getTekstJawny()
+    {
+        return tekstJawny;
+    }
+
 
 }

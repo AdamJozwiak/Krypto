@@ -79,15 +79,41 @@ public class Main extends Application {
             tekstZaszyfr.setText(wyswZaszyfr);
             tekstOdszyfr.setText(wyswOdszyfr);
             try {
-                pliki.writeFile(pliki.pathBox(filePath), slowo.deszyfruj(slowo.szyfruj()));
+                pliki.writeFile(pliki.pathBox("Sciezka do zapisu zaszyfrowanego pliku"), slowo.szyfruj());
+                pliki.writeFile(pliki.pathBox("Sciezka do zapisu klucza"), slowo.getKlucz());
+                pliki.writeFile(pliki.pathBox("Sciezka do zapisu odszyfrowanego pliku"), slowo.deszyfruj(slowo.szyfruj()));
+
             }
             catch (IOException el) {
                 el.printStackTrace();
             }
         });
 
+        Button button_szyfrklucz = new Button("Odszyfruj z kluczem");
+        GridPane.setConstraints(button_szyfrklucz, 3, 2);
+
+        button_szyfrklucz.setOnAction(e -> {
+            String filePath = tekstPlik.getText();
+            Pliki pliki = new Pliki();
+
+                Szyfruj slowo = new Szyfruj(pliki.readFile(Pliki.pathBox("Podaj sciezkie do klucza")), pliki.readFile(filePath));
+
+            String wyswZaszyfr = new String(slowo.getTekstJawny());
+            String wyswOdszyfr = new String (slowo.deszyfruj(slowo.getTekstJawny()));
+            tekstZaszyfr.setText(wyswZaszyfr);
+            tekstOdszyfr.setText(wyswOdszyfr);
+            try {
+                pliki.writeFile(pliki.pathBox("Sciezka do zapisu odszyfrowanego pliku"), slowo.deszyfruj(slowo.getTekstJawny()));
+            }
+            catch (IOException el) {
+                el.printStackTrace();
+            }
+
+
+        });
+
         //Dodawanie do Grid
-        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaPlik, tekstPlik, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_szyfrplik);
+        grid.getChildren().addAll(nazwaSzyfr, tekstSzyfr, nazwaPlik, tekstPlik, nazwaZaszyfr, tekstZaszyfr, nazwaOdszyfr, tekstOdszyfr, button_szyfr, button_szyfrplik, button_szyfrklucz);
 
 
         Scene scene = new Scene(grid, 440, 150);

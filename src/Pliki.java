@@ -19,11 +19,11 @@ public class Pliki {
     public byte[] readFile (String pathFile)
     {
         File file = new File(pathFile);
-        byte[] fileContent = new byte[(int) file.length()];
-        FileInputStream fin;
+        byte[] fileByte = new byte[(int) file.length()];
+        FileInputStream inFile;
         try{
-            fin = new FileInputStream(file);
-            fin.read(fileContent);
+            inFile = new FileInputStream(file);
+            inFile.read(fileByte);
         }catch (FileNotFoundException e){
             System.out.print("Błąd, nie znaleziono pliku");
         }
@@ -31,21 +31,21 @@ public class Pliki {
             System.out.print("Błąd odczytu pliku");
         }
 
-        return fileContent;
+        return fileByte;
     }
     public void writeFile(String pathfile, byte[] cipher) throws IOException{
         Path path = Paths.get(pathfile);
         Files.write(path, cipher);
     }
 
-    public static String pathBox(String pathFile){
+    public static String pathBox(String komunikat){
         Stage alert = new Stage();
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.setTitle("Wybierz swoją drogę");
         alert.setMinWidth(250);
         final String[] path = {new String()};
 
-        Label label = new Label("Podaj ścieżkę aby zapisać do pliku:");
+        Label label = new Label(komunikat);
         TextField field = new TextField();
 
 
